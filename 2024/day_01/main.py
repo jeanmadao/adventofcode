@@ -3,16 +3,13 @@ import os
 import requests
 
 dotenv.load_dotenv("../../.env")
-dotenv.load_dotenv("../.env")
-dotenv.load_dotenv(".env")
 
-SESSION_COOKIE = os.getenv("SESSION_COOKIE")
-EVENT = os.getenv("EVENT")
-DAY = os.getenv("DAY")
 INPUT_FILENAME = os.getenv("INPUT_FILENAME")
+SESSION_COOKIE = os.getenv("SESSION_COOKIE")
+EVENT = 2024
+DAY = 1
 URL = f"https://adventofcode.com/{EVENT}/day/{DAY}/input"
 HEADERS = {"Cookie": f"session={SESSION_COOKIE}"}
-print(SESSION_COOKIE, EVENT, DAY, INPUT_FILENAME)
 
 def get_input():
     chall_input = None
@@ -27,7 +24,7 @@ def get_input():
 
 def part_1():
     chall_input = get_input()
-    total = 0 
+    res = 0 
     a = []
     b = []
     for line in chall_input.split('\n'):
@@ -35,14 +32,14 @@ def part_1():
         a.append(int(value_a))
         b.append(int(value_b))
     for value_a, value_b in zip(sorted(a), sorted(b)):
-        total += abs(value_a - value_b)
-    print(f"{total}")
-    return total
+        res += abs(value_a - value_b)
+    print(f"{res = }")
+    return res
 
 
 def part_2():
     chall_input = get_input()
-    total = 0 
+    res = 0 
     a = []
     b = []
     for line in chall_input.split('\n'):
@@ -53,10 +50,10 @@ def part_2():
     for value in b:
         count[value] = count.get(value, 0) + 1
     for value in a:
-        total += value * count.get(value, 0)
-    print(f"{total}")
-    return total
+        res += value * count.get(value, 0)
+    print(f"{res = }")
+    return res 
 
 if __name__ == "__main__":
     # part_1()
-    part_2()
+    # part_2()
