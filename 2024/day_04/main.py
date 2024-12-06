@@ -1,29 +1,13 @@
-import dotenv
-import os
-import requests
+import sys
 
-dotenv.load_dotenv("../../.env")
+sys.path.append("../../")
+from lib import get_input
 
-INPUT_FILENAME = os.getenv("INPUT_FILENAME")
-SESSION_COOKIE = os.getenv("SESSION_COOKIE")
 EVENT = 2024
 DAY = 4
-URL = f"https://adventofcode.com/{EVENT}/day/{DAY}/input"
-HEADERS = {"Cookie": f"session={SESSION_COOKIE}"}
-
-def get_input():
-    chall_input = None
-    if not os.path.isfile(INPUT_FILENAME):
-        r = requests.get(URL, headers=HEADERS)
-        if r.status_code == 200:
-            with open(INPUT_FILENAME, "w") as file:
-                file.write(r.text)
-    with open(INPUT_FILENAME, "r") as file:
-        chall_input = file.read().strip()
-    return chall_input
 
 def part_1():
-    chall_input = get_input()
+    chall_input = get_input(EVENT, DAY)
     res = 0 
 
     grid = chall_input.split('\n')
@@ -43,7 +27,7 @@ def part_1():
     return res
 
 def part_2():
-    chall_input = get_input()
+    chall_input = get_input(EVENT, DAY)
     res = 0 
 
     grid = chall_input.split('\n')
@@ -64,5 +48,5 @@ def part_2():
     return res 
 
 if __name__ == "__main__":
-    # part_1()
+    part_1()
     part_2()
