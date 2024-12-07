@@ -10,7 +10,6 @@ SESSION_COOKIE = os.getenv("SESSION_COOKIE")
 def get_input(event: int, day: int) -> str:
     url = f"https://adventofcode.com/{event}/day/{day}/input"
     headers = {"Cookie": f"session={SESSION_COOKIE}"}
-    file_location = INPUT_FILENAME
 
     if not os.path.isfile(INPUT_FILENAME):
         r = requests.get(url, headers=headers)
